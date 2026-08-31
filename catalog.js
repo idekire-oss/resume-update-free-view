@@ -1,4 +1,4 @@
-/* Display catalog only. No engine, no secrets, no network fonts. */
+/* Display catalog — templates and looks only. No engine, no network, no secrets. */
 window.RESUME_VIEW_CATALOG = {
   looks: {
     ink: ["#1c1917", "#44403c", "#1c1917", "full", "plain", "upper", "left", "regular", 0.4],
@@ -12,7 +12,7 @@ window.RESUME_VIEW_CATALOG = {
     midnight: ["#0c0a09", "#57534e", "#0c0a09", "full", "plain", "upper", "left", "regular", 0.6],
     sand: ["#44403c", "#78716c", "#78350f", "accent", "plain", "upper", "left", "regular", 0.35],
     minimal: ["#1c1917", "#57534e", "#1c1917", "none", "plain", "title", "left", "airy", 0],
-    editorial: ["#1c1917", "#44403c", "#1c1917", "full", "plain", "title", "left", "regular", 0],
+    editorial: ["#1c1917", "#44403c", "#1c1917", "full", "plain", "title", "left", "regular", 0.25],
     lined: ["#1c1917", "#44403c", "#1c1917", "double", "plain", "upper", "left", "regular", 0.5],
     centered: ["#1c1917", "#44403c", "#1c1917", "full", "plain", "upper", "center", "regular", 0.8],
     rail: ["#1c1917", "#44403c", "#1e3a5f", "accent", "bar", "upper", "left", "regular", 0.4],
@@ -23,7 +23,7 @@ window.RESUME_VIEW_CATALOG = {
     scholar: ["#1c1917", "#57534e", "#7f1d1d", "none", "underline", "title", "left", "airy", 0],
   },
   headings: {
-    summary: "Summary",
+    summary: "Professional Summary",
     skills: "Skills",
     experience: "Experience",
     education: "Education",
@@ -60,7 +60,7 @@ window.RESUME_VIEW_CATALOG = {
   extraHeadings: {
     "executive-two-page": { summary: "Executive summary" },
     graduate: { summary: "Profile" },
-    "uk-cv": { summary: "Personal statement", skills: "Key skills", experience: "Work experience" },
+    "uk-cv": { summary: "Professional summary", skills: "Key skills", experience: "Work experience" },
     "academic-cv": { summary: "Research profile", experience: "Appointments" },
     "eu-profile": { summary: "Profile", experience: "Work experience" },
     "ph-cv": { summary: "Professional summary", certs: "Licenses, TESDA, and certifications" },

@@ -5,6 +5,53 @@ body {
   font-family: Helvetica, Arial, "Segoe UI", sans-serif;
 }
 
+.frame {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 20px 16px 0;
+  font: 13px/1.5 "Segoe UI", sans-serif;
+}
+
+.frame-intro {
+  padding-top: 24px;
+}
+
+.frame-kicker {
+  margin: 0 0 6px;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #57534e;
+}
+
+.frame-title {
+  margin: 0 0 8px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.frame-lead {
+  margin: 0;
+  color: #44403c;
+}
+
+.frame-footer {
+  padding-bottom: 32px;
+  color: #57534e;
+  font-size: 12px;
+}
+
+.frame-footer a {
+  color: #1c1917;
+}
+
+.note code {
+  font-size: 12px;
+  background: #f5f0e6;
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
 .note,
 .error,
 .empty {

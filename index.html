@@ -5,27 +5,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta
     http-equiv="Content-Security-Policy"
-    content="default-src 'none'; script-src 'self'; style-src 'self'; img-src blob:; font-src 'none'; connect-src 'none'; frame-src blob:; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
+    content="default-src 'none'; script-src 'self'; style-src 'self'; img-src blob:; font-src 'none'; connect-src 'none'; frame-src blob:; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; object-src 'none'"
   />
   <meta name="referrer" content="no-referrer" />
   <meta name="robots" content="noindex,nofollow" />
   <meta http-equiv="Cache-Control" content="no-cache" />
-  <title>Resume view</title>
-  <link rel="stylesheet" href="app.css?v=4" />
+  <meta name="color-scheme" content="light" />
+  <title>Resume view — display only</title>
+  <link rel="stylesheet" href="app.css?v=5" />
 </head>
 <body>
+  <header class="frame frame-intro">
+    <p class="frame-kicker">Resume Update Free · public viewer</p>
+    <h1 class="frame-title">Resume view</h1>
+    <p class="frame-lead">
+      Display only. This page shows a resume sheet on <strong>your device</strong> — nothing is sent to GitHub,
+      and there is no sign-in, no generation, and no local AI on this site.
+    </p>
+  </header>
+
   <p id="note" class="note">
-    Display only. Opened on this device — nothing is sent to GitHub. Open a view file or PDF (max 10 MB), or use a link from Resume Align on your PC.
+    Open a <code>#v1z.…</code> link copied from Resume Update Free on your PC, or choose a
+    <code>.view.json</code> / PDF file below (max 10 MB). Word and Excel files are not opened here — use the desktop app first.
   </p>
   <p id="error" class="error" hidden></p>
   <div id="empty" class="empty">
     <label class="file">
       Open .view.json or PDF
-      <input id="file" type="file" />
+      <input id="file" type="file" accept=".json,.pdf,application/json,application/pdf" />
     </label>
   </div>
   <article id="sheet" class="sheet" hidden></article>
-  <script src="catalog.js?v=4"></script>
-  <script src="app.js?v=4"></script>
+
+  <footer class="frame frame-footer">
+    <p>
+      <strong>Privacy:</strong> URL hashes stay in your browser. Files you pick stay on your device unless you share them elsewhere.
+      <a href="https://github.com/idekire-oss/resume-align-view/blob/main/SECURITY.md">Security notes</a>
+    </p>
+  </footer>
+
+  <script src="catalog.js?v=5"></script>
+  <script src="app.js?v=5"></script>
 </body>
 </html>

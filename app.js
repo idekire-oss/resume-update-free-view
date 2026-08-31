@@ -12,6 +12,8 @@
   };
 
   const MAX_FILE_BYTES = 10 * 1024 * 1024;
+  const MAX_JSON_CHARS = 2 * 1024 * 1024;
+  const MAX_HASH_CHARS = 8000;
   let objectUrl = "";
 
   function clearObjectUrl() {
@@ -46,18 +48,31 @@
     return bytes;
   }
 
+  function parseJsonText(text) {
+    if (typeof text !== "string" || text.length > MAX_JSON_CHARS) {
+      throw new Error("View file is too large.");
+    }
+    const raw = JSON.parse(text);
+    if (!isRecord(raw)) throw new Error("Bad view payload.");
+    if ("__proto__" in raw || "constructor" in raw) throw new Error("Bad view payload.");
+    return raw;
+  }
+
   async function decodeHash(hash) {
     const value = hash.replace(/^#/, "");
-    if (value.length > 8000) throw new Error("View link is too large.");
+    if (value.length > MAX_HASH_CHARS) throw new Error("View link is too large.");
     if (value.startsWith("v1z.")) {
       const bytes = fromBase64Url(value.slice(4));
       const stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream("gzip"));
       const json = await new Response(stream).text();
-      return JSON.parse(json);
+      if (json.length > MAX_JSON_CHARS) throw new Error("View link is too large.");
+      return parseJsonText(json);
     }
     if (value.startsWith("v1.")) {
       const bytes = fromBase64Url(value.slice(3));
-      return JSON.parse(new TextDecoder().decode(bytes));
+      const text = new TextDecoder().decode(bytes);
+      if (text.length > MAX_JSON_CHARS) throw new Error("View link is too large.");
+      return parseJsonText(text);
     }
     throw new Error("Unknown view format.");
   }
@@ -109,6 +124,7 @@
           url: asString(raw.resume.basics.url, 200),
           location: asString(raw.resume.basics.location, 120),
           summary: asString(raw.resume.basics.summary, 1600),
+          summaryHeading: asString(raw.resume.basics.summaryHeading, 80),
         },
         work: jobs,
         volunteer,
@@ -123,7 +139,10 @@
     };
   }
 
-  function heading(template, section) {
+  function heading(template, section, resume) {
+    if (section === "summary" && resume?.basics?.summaryHeading) {
+      return resume.basics.summaryHeading;
+    }
     return (catalog.extraHeadings[template] && catalog.extraHeadings[template][section]) || catalog.headings[section];
   }
 
@@ -200,7 +219,7 @@
 
     const resume = payload.resume;
     for (const section of catalog.templates[payload.template]) {
-      const title = heading(payload.template, section);
+      const title = heading(payload.template, section, resume);
       if (section === "summary" && resume.basics.summary) {
         const wrap = el("section");
         const h = el("h3", headingStyle === "plain" ? "" : headingStyle);
@@ -375,11 +394,14 @@
     if (kind === "pdf") {
       const frame = el("iframe", "file-frame");
       frame.title = "PDF";
+      frame.setAttribute("sandbox", "allow-same-origin");
+      frame.referrerPolicy = "no-referrer";
       frame.src = `${objectUrl}#toolbar=0&navpanes=0&scrollbar=1&view=FitH`;
       sheetEl.appendChild(frame);
     } else {
       const img = el("img", "file-image");
       img.alt = "Resume scan";
+      img.referrerPolicy = "no-referrer";
       img.src = objectUrl;
       sheetEl.appendChild(img);
     }
@@ -404,10 +426,11 @@
         return;
       }
       if (kind === "office") {
-        fail("Word and Excel stay on your PC. In Resume Align, generate then copy the public view link — or save a PDF (max 10 MB).");
+        fail("Word and Excel are not opened on this public viewer. In Resume Update Free on your PC, export a PDF or copy a public view link.");
         return;
       }
-      await show(JSON.parse(await file.text()));
+      const text = await file.text();
+      await show(parseJsonText(text));
     } catch {
       fail("That file is not a valid view JSON or PDF.");
     }
