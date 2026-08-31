@@ -1,4 +1,4 @@
-# Security — resume-align-view
+# Security — resume-update-free-view
 
 This repository is a **static, display-only** GitHub Pages site. There is no server, database, authentication, or local AI runtime here.
 
@@ -21,7 +21,7 @@ This repository is a **static, display-only** GitHub Pages site. There is no ser
 
 ## Reporting
 
-Open a [GitHub Security Advisory](https://github.com/idekire-oss/resume-align-view/security/advisories/new) on this repository. For issues in the main Resume Update Free app, use the [main repo advisory page](https://github.com/idekire-oss/resume-update-free/security/advisories/new).
+Open a [GitHub Security Advisory](https://github.com/idekire-oss/resume-update-free-view/security/advisories/new) on this repository. For issues in the main Resume Update Free app, use the [main repo advisory page](https://github.com/idekire-oss/resume-update-free/security/advisories/new).
 
 ## Operator checklist (before each publish)
 
