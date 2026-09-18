@@ -2,7 +2,6 @@
 
 **Display-only** companion for [Resume Update Free](https://github.com/idekire-oss/resume-update-free).
 
-Live site: **https://idekire-oss.github.io/resume-update-free-view/**
 
 ## What this is
 
