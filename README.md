@@ -1,7 +1,5 @@
 # Resume view (public)
 
-**Display-only** companion for [Resume Update Free](https://github.com/idekire-oss/resume-update-free).
-
 
 ## What this is
 
